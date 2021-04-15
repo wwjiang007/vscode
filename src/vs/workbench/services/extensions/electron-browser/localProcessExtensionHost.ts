@@ -174,7 +174,6 @@ export class LocalProcessExtensionHost implements IExtensionHost {
 
 		this._toDispose.add(this._onExit);
 		this._toDispose.add(this._lifecycleService.onWillShutdown(e => this._onWillShutdown(e)));
-		this._toDispose.add(this._lifecycleService.onDidShutdown(reason => this.terminate()));
 		this._toDispose.add(this._extensionHostDebugService.onClose(event => {
 			if (this._isExtensionDevHost && this._environmentService.debugExtensionHost.debugId === event.sessionId) {
 				this._nativeHostService.closeWindow();
@@ -697,23 +696,12 @@ export class LocalProcessExtensionHost implements IExtensionHost {
 		}
 
 		this._messageProtocol.then((protocol) => {
-
 			// Send the extension host a request to terminate itself
 			// (graceful termination)
 			protocol.send(createMessageOfType(MessageType.Terminate));
-
 			protocol.getSocket().dispose();
-
 			protocol.dispose();
-
-			// Give the extension host 10s, after which we will
-			// try to kill the process and release any resources
-			setTimeout(() => this._cleanResources(), 10 * 1000);
-
-		}, (err) => {
-
-			// Establishing a protocol with the extension host failed, so
-			// try to kill the process and release any resources.
+		}).finally(() => {
 			this._cleanResources();
 		});
 	}
@@ -741,6 +729,7 @@ export class LocalProcessExtensionHost implements IExtensionHost {
 			this._extensionHostDebugService.terminateSession(this._environmentService.debugExtensionHost.debugId);
 			event.join(timeout(100 /* wait a bit for IPC to get delivered */), 'join.extensionDevelopment');
 		}
+		this.terminate();
 	}
 }
 
