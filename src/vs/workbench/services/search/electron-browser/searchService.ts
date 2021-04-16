@@ -87,7 +87,7 @@ export class DiskSearch implements ISearchResultProvider {
 		const channel = getNextTickChannel(client.getChannel('search'));
 		this.raw = new SearchChannelClient(channel);
 
-		this.lifecycleService.onDidShutdown(() => {
+		this.lifecycleService.onWillShutdown(() => {
 			client.dispose();
 		});
 	}
