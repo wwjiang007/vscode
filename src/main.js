@@ -25,7 +25,7 @@ const { getUserDataPath } = require('./vs/platform/environment/node/userDataPath
 const product = require('../product.json');
 const { app, protocol, crashReporter } = require('electron');
 
-app.allowRendererProcessReuse = true;
+app.allowRendererProcessReuse = false;
 
 // Enable portable support
 const portable = bootstrapNode.configurePortable(product);
@@ -175,7 +175,7 @@ function configureCommandlineSwitchesSync(cliArgs) {
 		// Log level to use. Default is 'info'. Allowed values are 'critical', 'error', 'warn', 'info', 'debug', 'trace', 'off'.
 		'log-level',
 
-		// Enables render process reuse. Default value is 'true'. See https://github.com/electron/electron/issues/18397
+		// Enables render process reuse. Default value is 'false'. See https://github.com/electron/electron/issues/18397
 		'enable-render-process-reuse'
 	];
 
