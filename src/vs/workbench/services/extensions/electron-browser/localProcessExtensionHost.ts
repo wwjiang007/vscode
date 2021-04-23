@@ -621,6 +621,7 @@ export class LocalProcessExtensionHost implements IExtensionHost {
 	private _onExtHostProcessExit(code: number, signal: string): void {
 		if (this._terminating) {
 			// Expected termination path (we asked the process to terminate)
+			this._extensionHostProcess?.kill();
 			return;
 		}
 
@@ -682,31 +683,34 @@ export class LocalProcessExtensionHost implements IExtensionHost {
 		return withNullAsUndefined(this._inspectPort);
 	}
 
-	public terminate(): void {
-		if (this._terminating) {
-			return;
-		}
-		this._terminating = true;
+	public terminate(): Promise<void> {
+		return new Promise((c) => {
+			if (this._terminating) {
+				c();
+			}
+			this._terminating = true;
 
-		this._toDispose.dispose();
+			this._toDispose.dispose();
 
-		if (!this._messageProtocol) {
-			// .start() was not called
-			return;
-		}
+			if (!this._messageProtocol) {
+				// .start() was not called
+				c();
+			}
 
-		this._messageProtocol.then((protocol) => {
-			// Send the extension host a request to terminate itself
-			// (graceful termination)
-			protocol.send(createMessageOfType(MessageType.Terminate));
-			protocol.getSocket().dispose();
-			protocol.dispose();
-		}).finally(() => {
-			this._cleanResources();
+			this._messageProtocol.then((protocol) => {
+				// Send the extension host a request to terminate itself
+				// (graceful termination)
+				protocol.send(createMessageOfType(MessageType.Terminate));
+				protocol.flush();
+				protocol.dispose();
+				c(this._cleanResources(false));
+			}).catch(() => {
+				c(this._cleanResources(true));
+			});
 		});
 	}
 
-	private _cleanResources(): void {
+	private _cleanResources(killChild: boolean): void {
 		if (this._namedPipeServer) {
 			this._namedPipeServer.close();
 			this._namedPipeServer = null;
@@ -716,8 +720,10 @@ export class LocalProcessExtensionHost implements IExtensionHost {
 			this._extensionHostConnection = null;
 		}
 		if (this._extensionHostProcess) {
-			this._extensionHostProcess.kill();
-			this._extensionHostProcess = null;
+			if (killChild) {
+				this._extensionHostProcess.kill();
+				this._extensionHostProcess = null;
+			}
 		}
 	}
 
@@ -729,7 +735,7 @@ export class LocalProcessExtensionHost implements IExtensionHost {
 			this._extensionHostDebugService.terminateSession(this._environmentService.debugExtensionHost.debugId);
 			event.join(timeout(100 /* wait a bit for IPC to get delivered */), 'join.extensionDevelopment');
 		}
-		this.terminate();
+		event.join(this.terminate(), 'join.extensionHostTerminate');
 	}
 }
 
