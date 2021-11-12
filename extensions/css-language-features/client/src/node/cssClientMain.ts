@@ -4,13 +4,20 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { getNodeFSRequestService } from './nodeFs';
-import { ExtensionContext, extensions } from 'vscode';
+import { ExtensionContext, extensions, QuickPickItemKind, window } from 'vscode';
 import { startClient, LanguageClientConstructor } from '../cssClient';
 import { ServerOptions, TransportKind, LanguageClientOptions, LanguageClient } from 'vscode-languageclient/node';
 import { TextDecoder } from 'util';
 
 // this method is called when vs code is activated
 export function activate(context: ExtensionContext) {
+	window.showQuickPick([{
+		label: 'foo',
+		kind: QuickPickItemKind.Separator
+	},
+	{
+		label: 'bar',
+	}]);
 	const clientMain = extensions.getExtension('vscode.css-language-features')?.packageJSON?.main || '';
 
 	const serverMain = `./server/${clientMain.indexOf('/dist/') !== -1 ? 'dist' : 'out'}/node/cssServerMain`;
