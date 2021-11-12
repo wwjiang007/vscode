@@ -683,7 +683,6 @@ export class LocalProcessExtensionHost implements IExtensionHost {
 		return withNullAsUndefined(this._inspectPort);
 	}
 
-<<<<<<< HEAD
 	public terminate(): Promise<void> {
 		return new Promise((c) => {
 			if (this._terminating) {
