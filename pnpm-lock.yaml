@@ -938,8 +938,8 @@ importers:
         specifier: ^0.9.8
         version: 0.9.8(tslib@2.8.1)
       '@vscode/markdown-editor':
-        specifier: 0.0.2-153
-        version: 0.0.2-153
+        specifier: 0.0.2-165
+        version: 0.0.2-165
       '@vscode/observables':
         specifier: ^0.1.1-0
         version: 0.1.1-0
@@ -1328,7 +1328,7 @@ importers:
     dependencies:
       '@playwright/cli':
         specifier: latest
-        version: 0.1.1
+        version: 0.1.23
 
   test/automation:
     dependencies:
@@ -2898,8 +2898,8 @@ packages:
     resolution: {integrity: sha512-t3/zE0i9gik5R/NpRs7G2Xo/6NPeABW6ReplGdtkeWeAkaV764CgFgoKjJo21D2xgjnvDvRYubqBUu4xl0VCqA==}
     engines: {node: '>=18'}
 
-  '@playwright/cli@0.1.1':
-    resolution: {integrity: sha512-9k11ZfDwAfMVDDIuEVW1Wvs8SoDNXIY1dNQ+9C9/SS8ZmElkcxesu5eoL7vNa96ntibUGaq1TM2qQoqvdl/I9g==}
+  '@playwright/cli@0.1.23':
+    resolution: {integrity: sha512-+TuHfVgpK1SIlwyV7bcZ9SRRhnVOAIwJwxZCgEh5LWkZuyGfSYnHNx8J7H78dhCwMyLkJtGb/j5XICjzEKzrfg==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3600,8 +3600,8 @@ packages:
   '@vscode/l10n@0.0.18':
     resolution: {integrity: sha512-KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==}
 
-  '@vscode/markdown-editor@0.0.2-153':
-    resolution: {integrity: sha512-m2mkimOsOgHPMjxNKH1Hf4Q2jz+b9jGqS0nTmCEYZT0bhb13Na5t/wQWABjQMZ6+DkB4pdSBdNvW4hYLKo0lfw==}
+  '@vscode/markdown-editor@0.0.2-165':
+    resolution: {integrity: sha512-m4b2DMdFy/8EG0A5qvI8pGRJ4S6Qqd+LZl7E0bL0WTBLmWzweghnkF3tiIK+rUmk/2E/9y9iJvIuv6UTGHU4ZA==}
 
   '@vscode/markdown-it-katex@1.1.1':
     resolution: {integrity: sha512-3KTlbsRBPJQLE2YmLL7K6nunTlU+W9T5+FjfNdWuIUKgxSS6HWLQHaO3L4MkJi7z7MpIPpY+g4N+cWNBPE/MSA==}
@@ -7819,11 +7819,6 @@ packages:
   pkg-types@1.3.1:
     resolution: {integrity: sha512-/Jm5M4RvtBFVkKWRu2BLUTNP8/M2a+UwuAX+ae4770q1qVGtfjG+WTCupoZixokjmHiry8uI+dlY8KXYV5HVVQ==}
 
-  playwright-core@1.59.0-alpha-1771104257000:
-    resolution: {integrity: sha512-YiXup3pnpQUCBMSIW5zx8CErwRx4K6O5Kojkw2BzJui8MazoMUDU6E3xGsb1kzFviEAE09LFQ+y1a0RhIJQ5SA==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   playwright-core@1.60.0-alpha-1777077614000:
     resolution: {integrity: sha512-cAEm1N5jh0WMr9/EG4nPDbR326paHfMFa2FyHibhIfDGTswbKv8sYvaa9S0UXkgITdv4h6lQfcsD9Dl73lFZsg==}
     engines: {node: '>=18'}
@@ -7839,9 +7834,9 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.59.0-alpha-1771104257000:
-    resolution: {integrity: sha512-6SCMMMJaDRsSqiKVLmb2nhtLES7iTYawTWWrQK6UdIGNzXi8lka4sLKRec3L4DnTWwddAvCuRn8035dhNiHzbg==}
-    engines: {node: '>=18'}
+  playwright-core@1.65.0-alpha-2026-10-30:
+    resolution: {integrity: sha512-LPMw8B/HRQKMcJeXTqWSrkB/AfCKKmbDQMbu0p7zg8MgibOWaKMjZWR/StAtrQkOxvOmZEju1o1TnPgdoOCwrg==}
+    engines: {node: '>=20'}
     hasBin: true
 
   playwright@1.60.0-alpha-1777077614000:
@@ -7852,6 +7847,11 @@ packages:
   playwright@1.61.1:
     resolution: {integrity: sha512-DWnY5o3YbLWK4GovuAVwpqL+1VwGNdUGrRr++8j8PtQQzvAVZUIMjKQ90fY689sEJZJBbZVw1rXaOKSTitkzPQ==}
     engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.65.0-alpha-2026-10-30:
+    resolution: {integrity: sha512-dmAJMVHKzHvMQjn+XDcaq/pxaZ0W6n8i78rwTM+VGRtQ3WBF5ZiSdB1yL/cyoYUGUMwg3jxN65KqC9cERaCbIg==}
+    engines: {node: '>=20'}
     hasBin: true
 
   plist@3.1.0:
@@ -11056,10 +11056,10 @@ snapshots:
     dependencies:
       playwright-core: 1.61.1
 
-  '@playwright/cli@0.1.1':
+  '@playwright/cli@0.1.23':
     dependencies:
-      minimist: 1.2.8
-      playwright: 1.59.0-alpha-1771104257000
+      playwright: 1.65.0-alpha-2026-10-30
+      playwright-core: 1.65.0-alpha-2026-10-30
 
   '@playwright/cli@0.1.9':
     dependencies:
@@ -11828,7 +11828,7 @@ snapshots:
 
   '@vscode/l10n@0.0.18': {}
 
-  '@vscode/markdown-editor@0.0.2-153':
+  '@vscode/markdown-editor@0.0.2-165':
     dependencies:
       '@vscode/codicons': 0.0.46-36
       '@vscode/diff': 0.0.2-0
@@ -16721,19 +16721,13 @@ snapshots:
       mlly: 1.8.2
       pathe: 2.0.3
 
-  playwright-core@1.59.0-alpha-1771104257000: {}
-
   playwright-core@1.60.0-alpha-1777077614000: {}
 
   playwright-core@1.61.0-alpha-2026-06-04: {}
 
   playwright-core@1.61.1: {}
 
-  playwright@1.59.0-alpha-1771104257000:
-    dependencies:
-      playwright-core: 1.59.0-alpha-1771104257000
-    optionalDependencies:
-      fsevents: 2.3.2
+  playwright-core@1.65.0-alpha-2026-10-30: {}
 
   playwright@1.60.0-alpha-1777077614000:
     dependencies:
@@ -16746,6 +16740,10 @@ snapshots:
       playwright-core: 1.61.1
     optionalDependencies:
       fsevents: 2.3.2
+
+  playwright@1.65.0-alpha-2026-10-30:
+    dependencies:
+      playwright-core: 1.65.0-alpha-2026-10-30
 
   plist@3.1.0:
     dependencies:
